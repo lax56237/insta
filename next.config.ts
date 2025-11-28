@@ -9,19 +9,10 @@
 
 
 
-
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  output: "standalone",
-  experimental: {},
-  webpack: (config, { isServer }) => {
-    // This disables Turbopack completely
-    config.infrastructureLogging = { level: "none" };
-    return config;
-  },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Your existing config...
+  turbopack: {},
 };
 
 export default nextConfig;
-
-
