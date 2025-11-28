@@ -3,6 +3,7 @@ import http from "http";
 
 const server = http.createServer();
 const wss = new WebSocketServer({ server });
+const PORT = process.env.PORT || 4000;
 
 const clients = new Map();
 
@@ -10,7 +11,7 @@ wss.on("connection", (ws, req) => {
     const url = new URL(req.url, "http://localhost");
     const username = url.searchParams.get("username");
 
-    console.log("🟢 Connected:", username);
+    // console.log("🟢 Connected:", username);
 
     if (username) {
         clients.set(username, ws);
@@ -40,10 +41,10 @@ wss.on("connection", (ws, req) => {
 
     ws.on("close", () => {
         clients.delete(username);
-        console.log("🔴 Disconnected:", username);
+        // console.log("🔴 Disconnected:", username);
     });
 });
 
-server.listen(4000, () => {
-    console.log("🔥 WebSocket running at ws://localhost:4000");
+server.listen(PORT, () => {
+    console.log("🔥 WebSocket running");
 });

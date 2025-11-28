@@ -47,7 +47,11 @@ export default function ChatPage() {
         // Prevent multiple connections
         if (wsRef.current) wsRef.current.close();
 
-        const ws = new WebSocket(`ws://localhost:4000?username=${username}`);
+        // const ws = new WebSocket(`ws://localhost:4000?username=${username}`);
+        const ws = new WebSocket(
+            `${process.env.NEXT_PUBLIC_WS_URL}?username=${username}`
+        );
+
         wsRef.current = ws;
 
         ws.onmessage = (e) => {
